@@ -1,15 +1,13 @@
 part of 'screens.dart';
 
-class HomeScreen extends GetView<HomeController> {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  final controller = Get.put(HomeController());
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: secondaryOneColor,
-        drawer: GetBuilder<HomeController>(
-          id: 'user',
-          builder: (_) => const MyDrawer(),
-        ),
+        drawer: const MyDrawer(),
         appBar: AppBar(
           elevation: 0,
           backgroundColor: secondaryOneColor,
@@ -97,14 +95,27 @@ class HomeScreen extends GetView<HomeController> {
                 urlAsset: 'assets/explain_job.jpg',
                 title: 'Penjelasan Pekerjaan',
                 onTap: () => Get.to(
-                  () => const JobDetailsScreen(),
+                  () => JobDetailsScreen(),
                   transition: Transition.cupertino,
                 ),
               ),
               HomeMenu(
                 urlAsset: 'assets/katalog.jpg',
                 title: 'Katalog',
-                onTap: () {},
+                onTap: () async {
+                  final result = await controller.getDocument(
+                      isSingle: false, type: 'katalog', search: 'katalog');
+                  if (result.value ?? false) {
+                    Get.to(() => const ModulListScreen(
+                          title: 'Katalog',
+                          hintText: 'Search Katalog',
+                          isModul: false,
+                        ));
+                  } else {
+                    snackbar(context, false, result.message ?? 'Error',
+                        duration: 1000);
+                  }
+                },
               ),
             ],
           ),

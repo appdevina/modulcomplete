@@ -1,7 +1,8 @@
 part of 'screens.dart';
 
 class JobDetailsScreen extends GetView<HomeController> {
-  const JobDetailsScreen({Key? key}) : super(key: key);
+  JobDetailsScreen({Key? key}) : super(key: key);
+  final homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -31,6 +32,7 @@ class JobDetailsScreen extends GetView<HomeController> {
                           ? Get.to(
                               () => const ModulListScreen(
                                 title: 'Operasional',
+                                hintText: 'Search Modul',
                               ),
                               transition: Transition.cupertino,
                             )
@@ -38,40 +40,48 @@ class JobDetailsScreen extends GetView<HomeController> {
                               duration: 1000),
                     ),
               ),
-              HomeMenu(
-                urlAsset: 'assets/penjualan.jpg',
-                title: 'Penjualan',
-                onTap: () async => await controller
-                    .getDocument(isSingle: false, type: 'sales')
-                    .then(
-                      (value) => value.value ?? false
-                          ? Get.to(
-                              () => const ModulListScreen(
-                                title: 'Penjualan',
-                              ),
-                              transition: Transition.cupertino,
-                            )
-                          : snackbar(context, false, value.message ?? 'Error',
-                              duration: 1000),
-                    ),
-              ),
-              HomeMenu(
-                urlAsset: 'assets/pelayanan.jpg',
-                title: 'Pelayanan',
-                onTap: () async => await controller
-                    .getDocument(isSingle: false, type: 'service')
-                    .then(
-                      (value) => value.value ?? false
-                          ? Get.to(
-                              () => const ModulListScreen(
-                                title: 'Pelayanan',
-                              ),
-                              transition: Transition.cupertino,
-                            )
-                          : snackbar(context, false, value.message ?? 'Error',
-                              duration: 1000),
-                    ),
-              ),
+              ((homeController.user?.divisi.id ?? 0) == 10)
+                  ? HomeMenu(
+                      urlAsset: 'assets/penjualan.jpg',
+                      title: 'Penjualan',
+                      onTap: () async => await controller
+                          .getDocument(isSingle: false, type: 'sales')
+                          .then(
+                            (value) => value.value ?? false
+                                ? Get.to(
+                                    () => const ModulListScreen(
+                                      title: 'Penjualan',
+                                      hintText: 'Search Modul',
+                                    ),
+                                    transition: Transition.cupertino,
+                                  )
+                                : snackbar(
+                                    context, false, value.message ?? 'Error',
+                                    duration: 1000),
+                          ),
+                    )
+                  : const SizedBox(),
+              ((homeController.user?.divisi.id ?? 0) == 10)
+                  ? HomeMenu(
+                      urlAsset: 'assets/pelayanan.jpg',
+                      title: 'Pelayanan',
+                      onTap: () async => await controller
+                          .getDocument(isSingle: false, type: 'service')
+                          .then(
+                            (value) => value.value ?? false
+                                ? Get.to(
+                                    () => const ModulListScreen(
+                                      title: 'Pelayanan',
+                                      hintText: 'Search Modul',
+                                    ),
+                                    transition: Transition.cupertino,
+                                  )
+                                : snackbar(
+                                    context, false, value.message ?? 'Error',
+                                    duration: 1000),
+                          ),
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),

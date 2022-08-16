@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                         password: passwordController.text.trim(),
                       )
                       .then((value) => value.value ?? false
-                          ? Get.to(() => const HomeScreen())
+                          ? Get.offAll(() => HomeScreen())
                           : snackbar(context, false, value.message ?? 'Error',
                               duration: 1000)),
                   child: Container(

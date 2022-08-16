@@ -14,33 +14,35 @@ class MyDrawer extends GetView<HomeController> {
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
                   height: 150,
                   width: double.infinity / 4,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset(
-                        'assets/file.png',
-                        scale: 0.5,
-                      ),
-                      const Spacer(),
-                      Text(
-                        controller.user?.fullName ?? '-',
-                        style: title.copyWith(
-                            color: Colors.white, letterSpacing: 1),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        "${controller.user?.divisi.name ?? '-'} - ${controller.user?.joblevel.name ?? '-'}",
-                        style: subtTitle.copyWith(color: Colors.white),
-                        overflow: TextOverflow.ellipsis,
-                      )
-                    ],
-                  )),
+                  child: GetBuilder<HomeController>(
+                      id: 'user',
+                      builder: (_) => Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Image.asset(
+                                'assets/file.png',
+                                scale: 0.5,
+                              ),
+                              const Spacer(),
+                              Text(
+                                _.user?.fullName ?? '-',
+                                style: title.copyWith(
+                                    color: Colors.white, letterSpacing: 1),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                "${_.user?.divisi.name ?? '-'} - ${_.user?.joblevel.name ?? '-'}",
+                                style: subtTitle.copyWith(color: Colors.white),
+                                overflow: TextOverflow.ellipsis,
+                              )
+                            ],
+                          ))),
               const Divider(
                 thickness: 1,
                 color: Colors.grey,
               ),
               DrawerListTile(
-                ontap: () => Get.offAll(() => const HomeScreen()),
+                ontap: () => Get.offAll(() => HomeScreen()),
                 title: 'Home',
                 icon: MdiIcons.home,
               ),

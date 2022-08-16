@@ -65,6 +65,7 @@ class QuizHistoryListTile extends StatelessWidget {
       scrollable: false,
       content: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.min,
         children: [
           PieCharResult(
               correct: modul.correctAnswer!.toDouble(),

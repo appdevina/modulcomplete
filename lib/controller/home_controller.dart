@@ -53,7 +53,7 @@ class HomeController extends GetxController {
   }
 
   Future<ApiReturnValue<UserModel?>> getDataUser() async =>
-      await AuthService.getDataUser().then((value) => value);
+      await AuthService.getDataUser();
 
   Future<ApiReturnValue<bool>> logout() async => await AuthService.logout();
 
@@ -61,7 +61,7 @@ class HomeController extends GetxController {
   void onInit() async {
     FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
     await getDataUser().then((value) {
-      value.value != null ? user = value.value : null;
+      user = value.value;
       update(['user']);
     });
     super.onInit();

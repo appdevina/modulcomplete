@@ -12,9 +12,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final pref = await SharedPreferences.getInstance();
     bool quizMode = pref.getBool('modequiz') ?? false;
     String? token = pref.getString('token');
-    log(token ?? 'token null');
     if (quizMode && token != null) {
-      log('masuk quiz mode dan token tidak null');
       await checkToken().then((value) async => (value.value != null)
           ? Get.offAll(
               () => QuizScreen(),
@@ -28,14 +26,12 @@ class _SplashScreenState extends State<SplashScreen> {
     }
 
     if (token != null) {
-      log('masuk token tidak null');
       await checkToken().then((value) async => value.value != null
-          ? Get.offAll(() => const HomeScreen())
+          ? Get.offAll(() => HomeScreen())
           : await clearAllCredentials(pref)
               .then((_) => Get.offAll(() => LoginScreen())));
       return;
     }
-    log('masuk login');
 
     await clearAllCredentials(pref)
         .then((_) => Get.offAll(() => LoginScreen()));

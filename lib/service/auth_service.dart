@@ -42,6 +42,7 @@ class AuthService {
     required String password,
   }) async {
     try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       final response = await http.post(
         Uri.parse(baseApi + 'login'),
         headers: {
@@ -62,7 +63,7 @@ class AuthService {
         );
       }
       String token = json['data']['access_token'];
-      SharedPreferences prefs = await SharedPreferences.getInstance();
+
       await prefs.setString('token', token);
       return ApiReturnValue(value: true, message: 'berhasil');
     } catch (e) {

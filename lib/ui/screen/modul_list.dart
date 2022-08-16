@@ -2,7 +2,14 @@ part of 'screens.dart';
 
 class ModulListScreen extends GetView<HomeController> {
   final String title;
-  const ModulListScreen({Key? key, required this.title}) : super(key: key);
+  final String hintText;
+  final bool isModul;
+  const ModulListScreen(
+      {Key? key,
+      required this.title,
+      required this.hintText,
+      this.isModul = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) => WillPopScope(
@@ -30,17 +37,17 @@ class ModulListScreen extends GetView<HomeController> {
                     controller: controller.searchController,
                     onChanged: (String? value) => controller.search(value),
                     autocorrect: true,
-                    decoration: const InputDecoration(
-                      hintText: 'Search Modul',
-                      prefixIcon: Icon(Icons.search),
-                      hintStyle: TextStyle(color: Colors.grey),
+                    decoration: InputDecoration(
+                      hintText: hintText,
+                      prefixIcon: const Icon(Icons.search),
+                      hintStyle: const TextStyle(color: Colors.grey),
                       filled: true,
                       fillColor: Colors.white70,
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12.0)),
                         borderSide: BorderSide(color: Colors.green, width: 2),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         borderSide: BorderSide(color: Colors.green, width: 2),
                       ),
@@ -79,6 +86,7 @@ class ModulListScreen extends GetView<HomeController> {
                                 vertical: 5, horizontal: 10),
                             elevation: 10,
                             child: ListTileMenu(
+                              asset: isModul ? 'file' : 'catalog',
                               ontap: () => Get.to(
                                   () => PdfScreen(
                                         modul: controller.moduls![index],

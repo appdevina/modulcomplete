@@ -11,16 +11,12 @@ class LoginController extends GetxController {
       password: password,
     );
     isLoading.value = false;
-    if (result.value == null) {
+    if (result.value == false) {
       return ApiReturnValue(value: false, message: result.message);
     }
 
     return ApiReturnValue(value: true, message: null);
   }
 
-  Future<ApiReturnValue<UserModel?>> getDataUser() async =>
-      await AuthService.getDataUser().then((value) => value);
-
-  Future<ApiReturnValue<bool>> logout() async =>
-      await AuthService.logout().then((value) => value);
+  Future<ApiReturnValue<bool>> logout() async => await AuthService.logout();
 }
