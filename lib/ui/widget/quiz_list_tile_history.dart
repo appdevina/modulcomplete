@@ -27,7 +27,8 @@ class QuizHistoryListTile extends StatelessWidget {
               width: 30,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('assets/file.png'), fit: BoxFit.fill),
+                    image: AssetImage('assets/file.png'),
+                    fit: BoxFit.fitHeight),
               ),
             ),
             title: Text(
@@ -70,6 +71,9 @@ class QuizHistoryListTile extends StatelessWidget {
           PieCharResult(
               correct: modul.correctAnswer!.toDouble(),
               wrong: (modul.totalQuestion! - modul.correctAnswer!).toDouble()),
+          const SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

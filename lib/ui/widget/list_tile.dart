@@ -19,7 +19,7 @@ class ListTileMenu extends StatelessWidget {
           width: 40,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/$asset.png'), fit: BoxFit.fill),
+                image: AssetImage('assets/$asset.png'), fit: BoxFit.fitHeight),
           ),
         ),
         trailing: const Icon((Icons.arrow_circle_right_rounded)),

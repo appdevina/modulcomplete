@@ -21,7 +21,7 @@ class MyDrawer extends GetView<HomeController> {
                             children: [
                               Image.asset(
                                 'assets/file.png',
-                                scale: 0.5,
+                                scale: 1.5,
                               ),
                               const Spacer(),
                               Text(
