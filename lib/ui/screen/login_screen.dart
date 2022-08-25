@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 TextFieldInput(
                   controller: usernameController,
-                  hintText: 'Username (NIK)',
+                  hintText: 'Username',
                   keyboardType: TextInputType.text,
                 ),
                 const SizedBox(height: 20),
