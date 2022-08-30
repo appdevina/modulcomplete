@@ -21,7 +21,9 @@ class QuizResult extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: TextButton(
-                onPressed: () => Get.offAll(() => HomeScreen()),
+                onPressed: () {
+                  Get.offAll(() => HomeScreen());
+                },
                 child: Text(
                   'Keluar',
                   style: subtTitle.copyWith(color: Colors.white),

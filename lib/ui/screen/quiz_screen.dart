@@ -187,15 +187,22 @@ class QuizScreen extends StatelessWidget {
         TextButton(
             onPressed: () async =>
                 await controller.calculate(quizId: controller.quizId!).then(
-                      (value) => value.value != null
-                          ? Get.offAll(
-                              () => QuizResult(
-                                result: value.value!,
-                              ),
-                              transition: Transition.cupertino,
-                            )
-                          : snackbar(context, false, value.message!),
-                    ),
+                  (value) async {
+                    SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                    pref.remove('modequiz');
+                    pref.remove('quizid');
+                    pref.remove('index');
+                    value.value != null
+                        ? Get.offAll(
+                            () => QuizResult(
+                              result: value.value!,
+                            ),
+                            transition: Transition.cupertino,
+                          )
+                        : snackbar(context, false, value.message!);
+                  },
+                ),
             child: Text(
               "YES",
               style: subtTitle.copyWith(color: Colors.green[400]),
@@ -307,6 +314,7 @@ class QuizScreen extends StatelessWidget {
               SharedPreferences pref = await SharedPreferences.getInstance();
               pref.remove('modequiz');
               pref.remove('quizid');
+              pref.remove('index');
               await controller.calculate(quizId: controller.quizId!).then(
                   (value) => value.value != null
                       ? Get.offAll(() => QuizResult(result: value.value!))
