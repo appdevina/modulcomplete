@@ -12,10 +12,10 @@ class QuizController extends GetxController {
           {required int quizId}) async =>
       QuizService.getQuestion(quizId: quizId);
 
-  void startTimer() async {
+  void startTimer({int? seconds}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    time.value = prefs.getInt('quiz_time') ?? 30;
-    if (time.value == 0) time.value = 30;
+    time.value = prefs.getInt('quiz_time') ?? seconds ?? 30;
+    if (time.value == 0) time.value = seconds ?? 30;
     timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       if (time.value > 0) {
         time.value--;
@@ -55,6 +55,7 @@ class QuizController extends GetxController {
     if (index == quizes!.length - 1) {
       pref.remove('modequiz');
       pref.remove('quizid');
+      pref.remove('quiz_time');
       await calculate(quizId: quizId!).then((value) => (value.value != null)
           ? Get.offAll(() => QuizResult(result: value.value!))
           : null);
@@ -114,8 +115,8 @@ class QuizController extends GetxController {
       SharedPreferences pref = await SharedPreferences.getInstance();
       index++;
       pref.setInt('quiz_time', 0);
+      startTimer(seconds: quizes?[index].seconds ?? 30);
       update(['quiz']);
-      startTimer();
     }
   }
 
@@ -124,6 +125,7 @@ class QuizController extends GetxController {
     final pref = await SharedPreferences.getInstance();
     pref.remove('modequiz');
     pref.remove('quizid');
+    pref.remove('quiz_time');
     timer?.cancel();
     super.onClose();
   }
@@ -135,8 +137,8 @@ class QuizController extends GetxController {
     await getQuestion(quizId: quizId!).then((value) {
       if (value.value != null) {
         quizes = value.value;
+        startTimer(seconds: quizes?[index].seconds ?? 30);
         update(['quiz']);
-        startTimer();
       }
     });
     super.onInit();

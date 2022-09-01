@@ -193,6 +193,8 @@ class QuizScreen extends StatelessWidget {
                     pref.remove('modequiz');
                     pref.remove('quizid');
                     pref.remove('index');
+                    pref.remove('quiz_time');
+
                     value.value != null
                         ? Get.offAll(
                             () => QuizResult(
@@ -315,6 +317,8 @@ class QuizScreen extends StatelessWidget {
               pref.remove('modequiz');
               pref.remove('quizid');
               pref.remove('index');
+              pref.remove('quiz_time');
+
               await controller.calculate(quizId: controller.quizId!).then(
                   (value) => value.value != null
                       ? Get.offAll(() => QuizResult(result: value.value!))

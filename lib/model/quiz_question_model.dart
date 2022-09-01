@@ -7,6 +7,7 @@ class QuizQuestionModel extends Equatable {
     this.question,
     this.options,
     this.quizId,
+    this.seconds,
   });
 
   final int? id;
@@ -14,16 +15,17 @@ class QuizQuestionModel extends Equatable {
   final String? question;
   final List<QuizOptionModel>? options;
   final int? quizId;
+  final int? seconds;
 
   factory QuizQuestionModel.fromJson(Map<String, dynamic> json) =>
       QuizQuestionModel(
-        id: json["id"],
-        documentId: json["document_id"],
-        question: json["question"],
-        options: List<QuizOptionModel>.from(
-            json["options"].map((x) => QuizOptionModel.fromJson(x))),
-        quizId: json["quiz_id"],
-      );
+          id: json["id"],
+          documentId: json["document_id"],
+          question: json["question"],
+          options: List<QuizOptionModel>.from(
+              json["options"].map((x) => QuizOptionModel.fromJson(x))),
+          quizId: json["quiz_id"],
+          seconds: json['seconds']);
 
   Map<String, dynamic> toJson(QuizQuestionModel questionModel) => {
         "id": id,
@@ -31,6 +33,7 @@ class QuizQuestionModel extends Equatable {
         "question": question,
         "options": List<QuizOptionModel>.from(options!.map((x) => x.toJson())),
         "quiz_id": quizId,
+        'seconds': seconds,
       };
 
   @override
@@ -40,5 +43,6 @@ class QuizQuestionModel extends Equatable {
         question,
         options,
         quizId,
+        seconds,
       ];
 }
