@@ -57,13 +57,32 @@ class HomeController extends GetxController {
 
   Future<ApiReturnValue<bool>> logout() async => await AuthService.logout();
 
+  void notifAbsent() {
+    Get.defaultDialog(
+      title: 'Halo',
+      middleText:
+          "Selamat datang kembali ${user!.fullName}\n${DateFormat.yMMMd().format(DateTime.now())}",
+      barrierDismissible: false,
+      onConfirm: () async => await AuthService.checkIn().then((response) =>
+          response.value ?? false
+              ? Get.back()
+              : Get.snackbar('Error', response.message ?? 'Error')),
+      textConfirm: 'Check in',
+      confirmTextColor: Colors.white,
+    );
+  }
+
   @override
   void onInit() async {
     FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
-    await getDataUser().then((value) {
-      user = value.value;
-      update(['user']);
-    });
+    await getDataUser()
+        .then((value) {
+          user = value.value;
+          update(['user']);
+        })
+        .then((value) async => await AuthService.checkAbsent())
+        .then((value) =>
+            value.value ?? false ? notifAbsent() : print('sudah absen'));
     super.onInit();
   }
 }

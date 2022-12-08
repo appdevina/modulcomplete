@@ -96,4 +96,58 @@ class AuthService {
       return ApiReturnValue(value: false, message: e.toString());
     }
   }
+
+  static Future<ApiReturnValue<bool>> checkIn() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final response = await http.post(
+        Uri.parse(baseApi + 'check'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${prefs.getString('token')}',
+        },
+      );
+      final json = jsonDecode(response.body);
+      String message = json['meta']['message'] ?? 'Error';
+      if (response.statusCode != 200) {
+        return ApiReturnValue(
+          value: false,
+          message: message,
+        );
+      }
+
+      return ApiReturnValue(value: true, message: message);
+    } catch (e) {
+      return ApiReturnValue(value: false, message: e.toString());
+    }
+  }
+
+  static Future<ApiReturnValue<bool>> checkAbsent() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      final response = await http.get(
+        Uri.parse(baseApi +
+            'check?date=${DateFormat('yyyy-MM-dd').format(DateTime.now())}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${prefs.getString('token')}',
+        },
+      );
+      final json = jsonDecode(response.body);
+      String message = json['meta']['message'] ?? 'Error';
+      if (response.statusCode != 200) {
+        return ApiReturnValue(
+          value: false,
+          message: message,
+        );
+      }
+
+      return ApiReturnValue(value: true, message: message);
+    } catch (e) {
+      return ApiReturnValue(value: false, message: e.toString());
+    }
+  }
 }

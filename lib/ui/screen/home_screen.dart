@@ -4,6 +4,7 @@ class HomeScreen extends StatelessWidget {
   final controller = Get.put(HomeController());
   HomeScreen({Key? key}) : super(key: key);
 
+  String lastSeen = DateTime.now().toString();
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: secondaryOneColor,
@@ -23,25 +24,25 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: ListView(
             children: [
-              HomeMenu(
-                title: 'Complete Selular',
-                urlAsset: 'assets/complete.jpg',
-                onTap: () async => await controller
-                    .getDocument(
-                        isSingle: true,
-                        type: 'general',
-                        search: 'complete selular')
-                    .then(
-                      (value) => value.value ?? false
-                          ? Get.to(
-                              () => PdfScreen(
-                                  modul:
-                                      controller.modul ?? const ModulModel()),
-                            )
-                          : snackbar(context, false, value.message ?? 'Error',
-                              duration: 1000),
-                    ),
-              ),
+              // HomeMenu(
+              //   title: 'Complete Selular',
+              //   urlAsset: 'assets/complete.jpg',
+              //   onTap: () async => await controller
+              //       .getDocument(
+              //           isSingle: true,
+              //           type: 'general',
+              //           search: 'complete selular')
+              //       .then(
+              //         (value) => value.value ?? false
+              //             ? Get.to(
+              //                 () => PdfScreen(
+              //                     modul:
+              //                         controller.modul ?? const ModulModel()),
+              //               )
+              //             : snackbar(context, false, value.message ?? 'Error',
+              //                 duration: 1000),
+              //       ),
+              // ),
               HomeMenu(
                 urlAsset: 'assets/budaya.jpg',
                 title: 'Budaya Perusahaan',
@@ -56,25 +57,25 @@ class HomeScreen extends StatelessWidget {
                         : snackbar(context, false, value.message ?? 'Error',
                             duration: 1000)),
               ),
-              HomeMenu(
-                urlAsset: 'assets/csa.jpg',
-                title: 'Pengenalan Program',
-                onTap: () async => await controller
-                    .getDocument(
-                        isSingle: true,
-                        type: 'general',
-                        search: 'pengenalan program')
-                    .then(
-                      (value) => value.value ?? false
-                          ? Get.to(
-                              () => PdfScreen(
-                                  modul:
-                                      controller.modul ?? const ModulModel()),
-                            )
-                          : snackbar(context, false, value.message ?? 'Error',
-                              duration: 1000),
-                    ),
-              ),
+              // HomeMenu(
+              //   urlAsset: 'assets/csa.jpg',
+              //   title: 'Pengenalan Program',
+              //   onTap: () async => await controller
+              //       .getDocument(
+              //           isSingle: true,
+              //           type: 'general',
+              //           search: 'pengenalan program')
+              //       .then(
+              //         (value) => value.value ?? false
+              //             ? Get.to(
+              //                 () => PdfScreen(
+              //                     modul:
+              //                         controller.modul ?? const ModulModel()),
+              //               )
+              //             : snackbar(context, false, value.message ?? 'Error',
+              //                 duration: 1000),
+              //       ),
+              // ),
               HomeMenu(
                   urlAsset: 'assets/job_desc.jpg',
                   title: 'Job Description',

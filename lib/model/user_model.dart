@@ -16,6 +16,7 @@ class UserModel {
     required this.divisi,
     this.subdivisi,
     required this.joblevel,
+    this.lastSeen,
   });
 
   int id;
@@ -23,7 +24,8 @@ class UserModel {
   String username;
   Divisi divisi;
   SubDivisi? subdivisi;
-  Divisi joblevel;
+  JobLevel joblevel;
+  String? lastSeen;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json["id"],
@@ -33,7 +35,8 @@ class UserModel {
         subdivisi: json["subdivisi"] == null
             ? null
             : SubDivisi.fromJson(json["subdivisi"]),
-        joblevel: Divisi.fromJson(json["joblevel"]),
+        joblevel: JobLevel.fromJson(json["joblevel"]),
+        lastSeen: json["last_seen"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,6 +46,27 @@ class UserModel {
         "divisi": divisi.toJson(),
         "subdivisi": subdivisi,
         "joblevel": joblevel.toJson(),
+        "last_seen": lastSeen,
+      };
+}
+
+class JobLevel {
+  JobLevel({
+    required this.id,
+    required this.name,
+  });
+
+  int id;
+  String name;
+
+  factory JobLevel.fromJson(Map<String, dynamic> json) => JobLevel(
+        id: json["id"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
       };
 }
 

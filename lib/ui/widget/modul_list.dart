@@ -55,7 +55,8 @@ class ModulListWidget extends GetView<HomeController> {
                             child: ListTileMenu(
                               ontap: () => Get.to(
                                   () => PdfScreen(
-                                        modul: controller.moduls![index],
+                                        modul:
+                                            controller.filteredModuls![index],
                                       ),
                                   transition: Transition.cupertino),
                               titleText: controller.filteredModuls![index].name,

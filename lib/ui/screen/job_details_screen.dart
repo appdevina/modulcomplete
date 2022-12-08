@@ -82,6 +82,24 @@ class JobDetailsScreen extends GetView<HomeController> {
                           ),
                     )
                   : const SizedBox(),
+              HomeMenu(
+                urlAsset: 'assets/quiz.jpg',
+                title: 'Quiz',
+                onTap: () async => await controller
+                    .getDocument(isSingle: false, type: 'quiz')
+                    .then(
+                      (value) => value.value ?? false
+                          ? Get.to(
+                              () => const ModulListScreen(
+                                title: 'Quiz',
+                                hintText: 'Search Modul',
+                              ),
+                              transition: Transition.cupertino,
+                            )
+                          : snackbar(context, false, value.message ?? 'Error',
+                              duration: 1000),
+                    ),
+              ),
             ],
           ),
         ),
