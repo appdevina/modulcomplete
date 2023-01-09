@@ -24,3 +24,4 @@ part 'job_desc_screen.dart';
 part 'splash_screen.dart';
 part 'quiz_history.dart';
 part 'login_screen.dart';
+part 'budaya_details_screen.dart';
