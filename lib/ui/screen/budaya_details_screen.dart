@@ -24,7 +24,7 @@ class BudayaDetailsScreen extends GetView<HomeController> {
             children: [
               HomeMenu(
                 urlAsset: 'assets/handclap.jpg',
-                title: 'Budaya Perusahaan',
+                title: 'Budaya Perusahaan (Non Sales)',
                 onTap: () async => await controller
                     .getDocument(
                         isSingle: true,
@@ -39,7 +39,7 @@ class BudayaDetailsScreen extends GetView<HomeController> {
               ((homeController.user?.divisi.id ?? 0) == 10)
                   ? HomeMenu(
                       urlAsset: 'assets/coins.jpg',
-                      title: 'Budaya Penjualan',
+                      title: 'Budaya Perusahaan (Sales)',
                       onTap: () async => await controller
                           .getDocument(
                               isSingle: true,

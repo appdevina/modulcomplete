@@ -20,3 +20,4 @@ part 'quiz_list_tile_history.dart';
 part 'circle_chart.dart';
 part 'card_detail_result.dart';
 part 'text_field_input.dart';
+part 'score_tile.dart';

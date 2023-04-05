@@ -9,7 +9,7 @@ class QuizHistoryScreen extends GetView<HomeController> {
       backgroundColor: secondaryOneColor,
       drawer: GetBuilder<HomeController>(
         id: 'user',
-        builder: (_) => const MyDrawer(),
+        builder: (_) => MyDrawer(),
       ),
       appBar: AppBar(
         elevation: 0,

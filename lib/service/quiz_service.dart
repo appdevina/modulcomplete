@@ -176,4 +176,36 @@ class QuizService {
       return ApiReturnValue(value: null, message: e.toString());
     }
   }
+
+  static Future<ApiReturnValue<List<QuizGetScoreModel>>> getscore(
+      String month) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final response = await http.get(
+        Uri.parse(baseApi + 'quiz/getscore?month=$month'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${prefs.getString('token')}',
+        },
+      );
+
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        final score = (data['data'] as Iterable)
+            .map((e) => QuizGetScoreModel.fromJson(e))
+            .toList();
+
+        return ApiReturnValue<List<QuizGetScoreModel>>(
+          value: score,
+          message: 'berhasil',
+        );
+      }
+
+      return ApiReturnValue(value: null, message: data['meta']['message']);
+    } catch (e) {
+      return ApiReturnValue(value: null, message: e.toString());
+    }
+  }
 }
