@@ -1,7 +1,8 @@
 part of 'widgets.dart';
 
 class MyDrawer extends GetView<HomeController> {
-  const MyDrawer({Key? key}) : super(key: key);
+  MyDrawer({Key? key}) : super(key: key);
+  final homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -54,6 +55,14 @@ class MyDrawer extends GetView<HomeController> {
                             value.message ?? 'error')),
                 title: 'History Quiz',
                 icon: MdiIcons.history,
+              ),
+              DrawerListTile(
+                title: 'Leaderboard',
+                icon: MdiIcons.podiumGold,
+                ontap: () {
+                  homeController.getscore(DateTime.now());
+                  Get.to(() => LeaderboardScreen());
+                },
               ),
               const Spacer(),
               const Divider(

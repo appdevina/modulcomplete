@@ -6,6 +6,8 @@ class HomeController extends GetxController {
   List<ModulModel>? moduls;
   List<ModulModel>? filteredModuls;
   List<QuizResultModel> quizResults = [];
+  List<QuizGetScoreModel> quizScore = [];
+  RxString selectedMonth = DateFormat('MMM-yyyy').format(DateTime.now()).obs;
   final TextEditingController searchController = TextEditingController();
 
   Future<ApiReturnValue<bool>> getDocument(
@@ -70,6 +72,17 @@ class HomeController extends GetxController {
       textConfirm: 'Check in',
       confirmTextColor: Colors.white,
     );
+  }
+
+  Future<void> getscore(DateTime month) async {
+    var monthConvert = DateFormat(('yyyy-MM-dd')).format(month);
+
+    ApiReturnValue<List<QuizGetScoreModel>> scores =
+        await QuizService.getscore(monthConvert);
+    if (scores.value != null) {
+      quizScore = scores.value!;
+      update(['score']);
+    }
   }
 
   @override

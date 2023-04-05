@@ -24,14 +24,14 @@ class JobDetailsScreen extends GetView<HomeController> {
             children: [
               HomeMenu(
                 urlAsset: 'assets/operasional.jpg',
-                title: 'Operasional',
+                title: 'Basic 1',
                 onTap: () async => await controller
                     .getDocument(isSingle: false, type: 'operational')
                     .then(
                       (value) => value.value ?? false
                           ? Get.to(
                               () => const ModulListScreen(
-                                title: 'Operasional',
+                                title: 'Basic 1',
                                 hintText: 'Search Modul',
                               ),
                               transition: Transition.cupertino,
@@ -43,14 +43,14 @@ class JobDetailsScreen extends GetView<HomeController> {
               ((homeController.user?.divisi.id ?? 0) == 10)
                   ? HomeMenu(
                       urlAsset: 'assets/penjualan.jpg',
-                      title: 'Penjualan',
+                      title: 'Basic 2',
                       onTap: () async => await controller
                           .getDocument(isSingle: false, type: 'sales')
                           .then(
                             (value) => value.value ?? false
                                 ? Get.to(
                                     () => const ModulListScreen(
-                                      title: 'Penjualan',
+                                      title: 'Basic 2',
                                       hintText: 'Search Modul',
                                     ),
                                     transition: Transition.cupertino,
@@ -64,14 +64,14 @@ class JobDetailsScreen extends GetView<HomeController> {
               ((homeController.user?.divisi.id ?? 0) == 10)
                   ? HomeMenu(
                       urlAsset: 'assets/pelayanan.jpg',
-                      title: 'Pelayanan',
+                      title: 'Basic 3',
                       onTap: () async => await controller
                           .getDocument(isSingle: false, type: 'service')
                           .then(
                             (value) => value.value ?? false
                                 ? Get.to(
                                     () => const ModulListScreen(
-                                      title: 'Pelayanan',
+                                      title: 'Basic 3',
                                       hintText: 'Search Modul',
                                     ),
                                     transition: Transition.cupertino,

@@ -35,7 +35,7 @@ class HomeMenu extends StatelessWidget {
               title,
               textAlign: TextAlign.left,
               style: subtTitle
-                  .copyWith(fontSize: 27, color: Colors.white, shadows: [
+                  .copyWith(fontSize: 25, color: Colors.white, shadows: [
                 const Shadow(
                   color: Colors.black,
                   blurRadius: 40,

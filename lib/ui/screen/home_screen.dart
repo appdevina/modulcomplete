@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: secondaryOneColor,
-        drawer: const MyDrawer(),
+        drawer: MyDrawer(),
         appBar: AppBar(
           elevation: 0,
           backgroundColor: secondaryOneColor,
@@ -46,16 +46,10 @@ class HomeScreen extends StatelessWidget {
               HomeMenu(
                 urlAsset: 'assets/budaya.jpg',
                 title: 'Budaya Perusahaan',
-                onTap: () async => await controller
-                    .getDocument(
-                        isSingle: true,
-                        type: 'general',
-                        search: 'budaya perusahaan')
-                    .then((value) => value.value ?? false
-                        ? Get.to(() => PdfScreen(
-                            modul: controller.modul ?? const ModulModel()))
-                        : snackbar(context, false, value.message ?? 'Error',
-                            duration: 1000)),
+                onTap: () => Get.to(
+                  () => BudayaDetailsScreen(),
+                  transition: Transition.cupertino,
+                ),
               ),
               // HomeMenu(
               //   urlAsset: 'assets/csa.jpg',
